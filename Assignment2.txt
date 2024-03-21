@@ -1,0 +1,45 @@
+1a. we are looking for type f files then putting the result into one.txt
+and then any error messages are in two.txt
+b. cat one.txt i can see the files but two.txt permission is denied
+
+2. i first did wget to the get the csv file
+head -n 1 "Global YouTube Statistics.csv" | awk -F ',' '{for(i=1;i<=NF;i++) print i, $i}'
+i did this to find the proper columns
+cut -d ',' -f 20,21 "Global YouTube Statistics.csv"
+i cut all the columns but the required ones created_year and created_month
+awk -F ',' '{count[$1","$2]++} END {for (date in count) print date" with "count[date]" channels"}'
+this is to combine the entries that have the same year and month to get total
+channels made
+sort -nrk3
+this sorts it by the value of the third value which is channels created
+head -n 3
+will grab the first 3 entries
+this was the output:
+2006,Mar with 15 channels
+2014,Jul with 13 channels
+2014,Aug with 12 channels
+
+3. ps -u breannasp24
+output:
+PID TTY          TIME CMD
+3847556 ?        00:00:00 systemd
+3847558 ?        00:00:00 (sd-pam)
+3847564 ?        00:00:00 sshd
+3847565 pts/2    00:00:00 bash
+3852906 pts/2    00:00:00 sort
+3853479 pts/2    00:00:00 head
+3853863 pts/2    00:00:00 ps
+
+4.
+b. I noticed there are PIDs and differing values for the TTY and lists certain commands
+the PID for the vim is 3862224
+d. I noticed the PIDs for bash and ps are different and also vim had disappeared
+i suspect this because we had quit our vi command so it is no longer in process
+
+5. the init process is a process that continues running until the system is shut down
+this was the PID 3860957 3854249 3851417 3847556 3830204 3827628 3826360 3818548 3788501 3523835 3433756 3312757 3304023 2808486 2492008 2422345 2379540 2248654 2073814 2060795 105881 86087 1 and this was the command
+pidof systemd
+
+6. ps aux is the command to display all running processes in Linux.
+a shows the processes from all users. the u displays the information about the process.
+the x will display process not shown in terminal.
